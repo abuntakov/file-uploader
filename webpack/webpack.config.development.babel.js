@@ -27,6 +27,7 @@ const config = {
 
 	entry: {
 		index: [
+			'react-hot-loader/patch',
 			baseConfig.entry.index,
 		],
 	},
@@ -100,12 +101,10 @@ const config = {
 			'/api/**': {
 				target: 'http://localhost:3000',
 			},
-		},
 
-		historyApiFallback: {
-			rewrites: [
-				{ from: /^\/(?!api).*$/, to: '/' },
-			],
+			'/': {
+				target: 'http://localhost:3000',
+			},
 		},
 	},
 

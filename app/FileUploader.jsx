@@ -1,12 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
 class FileUploader extends React.Component {
 	uploadFile = (event) => {
+		const { onFileUploaded } = this.props
 		const data = new FormData()
 		data.append('filename', event.target.files[0])
-		axios.post('/api/v1/file/upload', data).then((response) => {
-			console.log(response) // do something with the response
+		axios.post('/api/v1/file/upload', data).then(() => {
+			onFileUploaded()
 		})
 	}
 
@@ -17,6 +19,10 @@ class FileUploader extends React.Component {
 			</div>
 		)
 	}
+}
+
+FileUploader.propTypes = {
+	onFileUploaded: PropTypes.func.isRequired,
 }
 
 export default FileUploader
