@@ -1,0 +1,20 @@
+version: '2'
+services:
+  api:
+    build: .
+    ports:
+      - "80:3000"
+    links:
+      - db
+    environment:
+      - NODE_ENV=development
+      - postgres__uri=postgresql://db/touch
+  db:
+    image: postgres
+    volumes:
+      - /tmp/uploads:/tmp/uploads
+    environment:
+      - POSTGRES_DB=touch
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
